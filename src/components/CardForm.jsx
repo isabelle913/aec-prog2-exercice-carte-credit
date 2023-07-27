@@ -4,51 +4,24 @@ import Button from "react-bootstrap/Button";
 import BsForm from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Input from "./Input";
+import { Form } from "formik";
 
-const CardForm = ({ formData, onChange }) => {
+const CardForm = () => {
   return (
     <>
       <Container className="bg-light rounded ">
-        <BsForm>
+        <Form as={BsForm} noValidate>
           <Stack gap={2}>
-            <Input
-              type="text"
-              value={formData.name}
-              id="name"
-              onChange={onChange}
-              placeholder="Votre nom"
-            />
-            <Input
-              type="text"
-              value={formData.numbers}
-              id="numbers"
-              onChange={onChange}
-              placeholder="Numéro de carte de crédit"
-            />
-            <Input
-              type="text"
-              value={formData.month}
-              id="month"
-              onChange={onChange}
-              placeholder="date d'expiration"
-            />
-            <Input
-              type="text"
-              value={formData.year}
-              id="year"
-              onChange={onChange}
-              placeholder="date d'expiration"
-            />
-            <Input
-              type="text"
-              value={formData.cvc}
-              id="cvc"
-              onChange={onChange}
-              placeholder="CVC"
-            />
-            <Button variant="success">Confirmer</Button>
+            <Input label="Votre nom" type="text" id="name" />
+            <Input label="Numéro de carte de crédit" type="text" id="numbers" />
+            <Input label="date d'expiration" type="text" id="month" />
+            <Input label="date d'expiration" type="text" id="year" />
+            <Input label="CVC" type="text" id="cvc" />
+            <Button type="submit" variant="success">
+              Confirmer
+            </Button>
           </Stack>
-        </BsForm>
+        </Form>
       </Container>
     </>
   );

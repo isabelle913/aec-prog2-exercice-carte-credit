@@ -7,11 +7,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
+import { Formik } from "formik";
 
 function App() {
-  //const [text, setText] = useState(''valeurInitiale'')
-
-  const [formData, setFormData] = useState({
+  const [creditCardInfo, setCreditCardInfo] = useState({
     name: "John Doe",
     numbers: "0000 0000 0000 0000",
     month: "00",
@@ -19,13 +18,17 @@ function App() {
     cvc: "000",
   });
 
-  const onChange = (value, id) => {
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+  const initialValues = {
+    name: "John Doe",
+    numbers: "0000 0000 0000 0000",
+    month: "00",
+    year: "00",
+    cvc: "000",
   };
-
+  const onSubmit = (values) => {
+    setCreditCardInfo(values);
+    console.log(values);
+  };
   return (
     <>
       <Container fluid className="bg-info .bg-gradient p-4">
@@ -33,17 +36,22 @@ function App() {
           <Col>
             <Stack gap={2} className="mx-auto align-middle">
               <CardDisplayFront
-                numbers={formData.numbers}
-                name={formData.name}
-                month={formData.month}
-                year={formData.year}
+                numbers={creditCardInfo.numbers}
+                name={creditCardInfo.name}
+                month={creditCardInfo.month}
+                year={creditCardInfo.year}
               />
-              <CardDisplayBack cvc={formData.cvc} />
+              <CardDisplayBack cvc={creditCardInfo.cvc} />
             </Stack>
           </Col>
           <Col>
             <Row>
-              <CardForm formData={formData} onChange={onChange} />
+              <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+                validateOnChange>
+                <CardForm />
+              </Formik>
             </Row>
           </Col>
         </Row>

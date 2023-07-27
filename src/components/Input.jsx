@@ -1,20 +1,21 @@
 import React from "react";
-import BsInput from "react-bootstrap/FormControl";
+import Form from "react-bootstrap/Form";
+import { useField } from "formik";
 
-const Input = ({ type, value, id, onChange, placeholder }) => {
-  const handleChange = (event) => {
-    const value = event.target.value;
-    //console.log(value);
-    onChange(value, event.target.id);
-  };
+const Input = ({ label, type, id, ...rest }) => {
+  const [field, meta] = useField(id);
+  const isError = meta.touched && meta.error;
 
   return (
-    <BsInput
-      type={type}
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      id={id}></BsInput>
+    <Form.Group>
+      {label && <Form.Label htmlFor={id}>{label}</Form.Label>}
+      <Form.Control isInvalid={isError} type={type} {...field} {...rest} />
+      {isError && ( // rendering conditionnel si à gauche est thruthy, retourne ce qui est à droite
+        <Form.Control.Feedback type="invalid">
+          {meta.error}
+        </Form.Control.Feedback>
+      )}
+    </Form.Group>
   );
 };
 
