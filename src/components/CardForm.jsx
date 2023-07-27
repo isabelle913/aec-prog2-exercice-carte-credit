@@ -14,8 +14,8 @@ const CardForm = () => {
           <Stack gap={2}>
             <Input label="Votre nom" type="text" id="name" />
             <Input label="Numéro de carte de crédit" type="text" id="numbers" />
-            <Input label="date d'expiration" type="text" id="month" />
-            <Input label="date d'expiration" type="text" id="year" />
+            <Input label="Expiration mois MM" type="text" id="month" />
+            <Input label="Expiration année YY" type="text" id="year" />
             <Input label="CVC" type="text" id="cvc" />
             <Button type="submit" variant="success">
               Confirmer
